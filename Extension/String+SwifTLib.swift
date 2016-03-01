@@ -1,5 +1,5 @@
 //
-//  String+StLib.swift
+//  String+SwifTLib.swift
 //
 //  Created by StPashik on 20.04.15.
 //  Copyright (c) 2015 Legion. All rights reserved.
@@ -128,6 +128,14 @@ extension String {
         let dateFormatter: NSDateFormatter = NSDateFormatter.dateFormatterWithDateFormat(isFormat ? format! : "d.MM.yyyy")
         
         return dateFormatter.dateFromString(self)!
+    }
+    
+    func stringByStrippingHTML() -> String
+    {
+        let regex : NSRegularExpression = try! NSRegularExpression(pattern:"<[^>]+>", options: NSRegularExpressionOptions.CaseInsensitive)
+        let output = regex.stringByReplacingMatchesInString(self, options: NSMatchingOptions(), range: NSMakeRange(0, self.utf16.count), withTemplate: "")
+        
+        return output
     }
     
     public func replace(string:String, replacement:String) -> String {
